@@ -274,27 +274,50 @@
                     </div>
 
                     
-                        <div class="flex p-3">
-                            <input type="text" class="w-[80%] h-12"  placeholder="Have any copupon?"/>
-                            <button class="btn w-[20%] border-none bg-[#1DD100] text-white">Apply</button>
-                          </div>
+                        <div class="applyTop"><div class="flex applyDiv p-3">
+                            <input type="text" class="w-[80%] h-12 applyInput"  placeholder="Have any coupon?"/>
+                        <button class="btn applyBtn btn-disabled w-[20%] border-none bg-[#1DD100] text-white">Apply</button>
+                       
+                      </div></div>
                           
                           <div class="font-semibold flex justify-between p-3">
                             <h3>Grand Total</h3>
-                            <h3>BDT <span>0</span></h3>
+                            <h3>BDT <span class="grandTotal">0</span></h3>
                           </div>
 
                           <div>
                             <p class="font-semibold py-4">Passenger Name*</p>
-                            <input class="w-full p-4" type="text" placeholder="Enter your phone number">
+                            <input class="w-full pData p-4" type="text" placeholder="Enter your phone number">
 
                             <p class="font-semibold py-4">Phone Number*</p>
-                            <input class="w-full p-4" type="number" placeholder="Enter your name">
+                            <input class="w-full pData p-4" type="number" placeholder="Enter your name">
 
                             <p class="font-semibold py-4">Email ID</p>
-                            <input class="w-full p-4" type="email" placeholder="Enter your email id">
+                            <input class="w-full pData p-4" type="email" placeholder="Enter your email id">
 
-                            <div class="py-4"><button class="bg-[#1DD100] finalBtn  btn-disabled text-white btn w-full text-xl ">Next</button></div>
+                
+                            <!-- next Btn -->
+                
+                                <div class="py-4"><button class="bg-[#1DD100] finalBtn  btn-disabled text-white btn w-full text-xl " onclick="my_modal_4.showModal()">Next</button></div>
+
+                                <dialog id="my_modal_4" class="modal">
+                                <div class="modal-box w-11/12 h-[50%] md:h-[70%]  max-w-5xl ">
+                                    <div class="flex flex-col items-center w-[55%] mx-auto text-center">
+                                        <p><img src="images/success.png" alt=""></p>
+                                        <p class="text-2xl font-semibold text-[#1DD100]">SUCCESS</p>
+                                        <h3 class="font-bold text-lg">Hello!</h3>
+                                        <p class="py-2 text-lg font-semibold">Thank you for Booking Our Bus Seats. <br>
+                                            We are working hard to find the best service and deals for you. 
+                                            </p>
+                                        <p class="text-xl">Shortly you will find a confirmation in your email.</p> </div>   
+                                    <div class="modal-action flex justify-center items-center">
+                                    <form method="dialog">
+                                        <!-- if there is a button, it will close the modal -->
+                                        <button class="btn text-white btn-wide bg-[#1DD100]">Continue</button>
+                                    </form>
+                                    </div>
+                                </div>
+                                </dialog>
 
                             <div class="flex justify-between underline text-slate-600">
                                 <a href="##">Terms and Conditions</a>

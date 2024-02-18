@@ -5,49 +5,9 @@
     ticketCounter.scrollIntoView({behavior:'smooth'})
  })
 
-// seat Function
-
-//  const seatName = document.querySelector('.seat');
-// const clickBtn = document.querySelectorAll('.miamia');
-// const totalSeat = document.querySelector('.totalSeatNum');
-// const addedSeat = document.querySelector('.addSeatCount');
-// const finalButton = document.querySelector('.finalBtn');
-
-// let value1 = parseInt(totalSeat.innerText);
-// let value2 = parseInt(addedSeat.innerText);
-
-// function handleBtnClick() {
-//     const isWhite = this.classList.contains('bg-white');
-//     if (isWhite && (value2 < 4 || value2 === 0)) { 
-//         value1--; 
-//         value2++; 
-//         this.classList.add('bg-[#1DD100]');
-//         finalButton.classList.remove('btn-disabled');
-//     } else { 
-//         value1++; 
-//         value2--; 
-//         this.classList.remove('bg-[#1DD100]'); 
-//     }
-//     this.classList.toggle('bg-white');
-//     totalSeat.innerText = value1;
-//     addedSeat.innerText = value2;
-    
-//     clickBtn.forEach(
-//         btn => btn.disabled = value2 >= 4 ? !btn.classList.contains('bg-[#1DD100]') : false); 
-// }
 
 
-// clickBtn.forEach(btn =>  {
-//     btn.addEventListener('click', handleBtnClick)
-//     ;
-    
-// });
-
-
-
-
-
-
+// seat section 
 
 const seatName = document.querySelector('.seat');
 const clickBtn = document.querySelectorAll('.miamia');
@@ -59,10 +19,11 @@ const firstTotal = document.querySelector('.total');
 
 let value1 = parseInt(totalSeat.innerText);
 let value2 = parseInt(addedSeat.innerText);
-let totalPrice = 550;
+let totalPrice = 0;
 
 function handleBtnClick() {
     const isWhite = this.classList.contains('bg-white');
+
     if (isWhite && (value2 < 4 || value2 === 0)) { 
         value1--; 
         value2++; 
@@ -86,17 +47,21 @@ function handleBtnClick() {
         newTicketDiv.appendChild(seatPrice);
         
         // Append the new ticket div to the ticket main div
+        
         ticketDiv.appendChild(newTicketDiv);
-        firstTotal.innerText = totalPrice;
-        totalPrice+=550;
+        firstTotal.innerText = totalPrice + 550;
+         totalPrice+=550;
+         
+         
     } else { 
         value1++; 
         value2--; 
         this.classList.remove('bg-[#1DD100]');
-        firstTotal.innerText = totalPrice - 1100;
+        firstTotal.innerText = totalPrice - 550;
         totalPrice-=550;
        // Remove the last added ticket div
     const lastTicketDiv = ticketDiv.lastElementChild;
+    finalButton.classList.add('btn-disabled');
     if (lastTicketDiv) {
         lastTicketDiv.remove();
     }
@@ -104,13 +69,59 @@ function handleBtnClick() {
     this.classList.toggle('bg-white');
     totalSeat.innerText = value1;
     addedSeat.innerText = value2;
-    
     // Disable buttons when the maximum number of seats is reached
     clickBtn.forEach(btn => {
         btn.disabled = value2 >= 4 ? !btn.classList.contains('bg-[#1DD100]') : false;
     });
 }
-
+// Click Btn function  
 clickBtn.forEach(btn =>  {
     btn.addEventListener('click', handleBtnClick);
 });
+
+
+
+// coupon section
+const applyTopp = document.querySelector('.applyTop');
+const couponDiv = document.querySelector('.applyDiv');
+const couponBtn = document.querySelector('.applyBtn');
+const couponInput = document.querySelector('.applyInput');
+const grandPrice = document.querySelector('.grandTotal');
+
+
+couponBtn.addEventListener('click', function(){
+    couponDiv.classList.add('hidden');
+    
+    const discountData = document.createElement('p');
+    discountData.innerText = 'Discount amount:';
+    const discountPrice = document.createElement('p');
+    discountPrice.classList.add('text-red-700');
+    // Calculate discount price
+    discountPrice.innerText = totalPrice * 0.2; 
+
+    applyTopp.appendChild(discountData);
+    applyTopp.appendChild(discountPrice);
+    applyTopp.classList.add('flex','p-3','justify-between','font-semibold');
+    // Update grand total after discount
+    grandPrice.innerText = totalPrice - (totalPrice * 0.2); 
+});
+
+
+// const removeWhiteSpace = this.value.trim()
+couponInput.addEventListener('input', function() {
+    couponInput.value = couponInput.value.trim().toUpperCase()
+    if (couponInput.value === 'NEW20' || couponInput.value === 'COUPLE20') {
+        couponBtn.classList.remove('btn-disabled');
+    } else {
+        couponBtn.classList.add('btn-disabled');
+    }
+});
+
+
+// Next Button function
+
+// const nextInput = document.querySelectorAll('.pData');
+
+// finalButton.addEventListener('click',function(){
+//     if( nextInput.value > 1 )
+// })
