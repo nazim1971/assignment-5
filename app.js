@@ -125,14 +125,7 @@ couponInput.addEventListener('input', function() {
 });
 
 
-// Next Button function
-// const modelDiv = document/getElementById('my_modal_4')
-// const nextInput = document.querySelectorAll('.pData');
+// reload Btn
 
-// finalButton.addEventListener('click',function(){
-//     if( nextInput.value == 0 ){
-//         alert('Type Correct Data');
-//         modelDiv.classList.add('hidden');
-//         modelDiv.classList.remove('flex')
-//     }
-// })
+document.querySelector(".reloadButton").addEventListener("click", function() {
+    location.reload();})
