@@ -23,7 +23,7 @@ let totalPrice = 0;
 
 function handleBtnClick() {
     const isWhite = this.classList.contains('bg-white');
-
+   
     if (isWhite && (value2 < 4 || value2 === 0)) { 
         value1--; 
         value2++; 
@@ -61,7 +61,14 @@ function handleBtnClick() {
         totalPrice-=550;
        // Remove the last added ticket div
     const lastTicketDiv = ticketDiv.lastElementChild;
-    finalButton.classList.add('btn-disabled');
+    // Final Btn Disable Enable
+    if( value2 < 1){
+        finalButton.classList.add('btn-disabled');
+    }
+    else{
+        finalButton.classList.remove('btn-disabled');
+    }
+
     if (lastTicketDiv) {
         lastTicketDiv.remove();
     }
@@ -119,9 +126,13 @@ couponInput.addEventListener('input', function() {
 
 
 // Next Button function
-
+// const modelDiv = document/getElementById('my_modal_4')
 // const nextInput = document.querySelectorAll('.pData');
 
 // finalButton.addEventListener('click',function(){
-//     if( nextInput.value > 1 )
+//     if( nextInput.value == 0 ){
+//         alert('Type Correct Data');
+//         modelDiv.classList.add('hidden');
+//         modelDiv.classList.remove('flex')
+//     }
 // })
