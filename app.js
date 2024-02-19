@@ -29,6 +29,11 @@ function handleBtnClick() {
         value2++; 
         this.classList.add('bg-[#1DD100]');
         finalButton.classList.remove('btn-disabled');
+
+        // Coupon Input Field
+        if(value2 == 4){
+            couponInput.classList.remove('btn-disabled','bg-slate-300');
+        }    
         
         // Create a new ticket div element
         const newTicketDiv = document.createElement('div');
@@ -51,7 +56,9 @@ function handleBtnClick() {
         ticketDiv.appendChild(newTicketDiv);
         firstTotal.innerText = totalPrice + 550;
          totalPrice+=550;
-         
+
+         // grandTotal
+        grandPrice.innerText = totalPrice;
          
     } else { 
         value1++; 
@@ -59,16 +66,22 @@ function handleBtnClick() {
         this.classList.remove('bg-[#1DD100]');
         firstTotal.innerText = totalPrice - 550;
         totalPrice-=550;
+
+        // coupon input field
+        couponInput.classList.add('btn-disabled','bg-slate-300');
+
+        // grandTotal
+        grandPrice.innerText = totalPrice;
+
        // Remove the last added ticket div
     const lastTicketDiv = ticketDiv.lastElementChild;
     // Final Btn Disable Enable
-    if( value2 < 1){
+    if( value2 < 1 ){
         finalButton.classList.add('btn-disabled');
     }
     else{
-        finalButton.classList.remove('btn-disabled');
+        finalButton.classList.remove('btn-disabled');   
     }
-
     if (lastTicketDiv) {
         lastTicketDiv.remove();
     }
@@ -87,6 +100,15 @@ clickBtn.forEach(btn =>  {
 });
 
 
+// Number input Field
+const numberINput = document.querySelector('.pData');
+finalButton.addEventListener('click', function() {
+    const phoneNumber = numberINput.value.trim();
+    if (!phoneNumber) {
+        alert('Please enter your number.');   
+    } 
+});
+
 
 // coupon section
 const applyTopp = document.querySelector('.applyTop');
@@ -96,33 +118,48 @@ const couponInput = document.querySelector('.applyInput');
 const grandPrice = document.querySelector('.grandTotal');
 
 
+// Coupon Button
 couponBtn.addEventListener('click', function(){
     couponDiv.classList.add('hidden');
-    
     const discountData = document.createElement('p');
     discountData.innerText = 'Discount amount:';
     const discountPrice = document.createElement('p');
     discountPrice.classList.add('text-red-700');
-    // Calculate discount price
-    discountPrice.innerText = totalPrice * 0.2; 
+    if(couponInput.value === 'NEW15'){
+        
+         // Calculate discount price
+    discountPrice.innerText = totalPrice * 0.15; 
+
+    applyTopp.appendChild(discountData);
+    applyTopp.appendChild(discountPrice);
+    applyTopp.classList.add('flex','p-3','justify-between','font-semibold');
+
+    // Update grand total after discount
+    grandPrice.innerText = totalPrice - (totalPrice * 0.15);
+    } 
+    else if (couponInput.value === 'COUPLE 20') {
+
+          // Calculate discount price
+    discountPrice.innerText = totalPrice * 0.20; 
 
     applyTopp.appendChild(discountData);
     applyTopp.appendChild(discountPrice);
     applyTopp.classList.add('flex','p-3','justify-between','font-semibold');
     // Update grand total after discount
-    grandPrice.innerText = totalPrice - (totalPrice * 0.2); 
-});
+    grandPrice.innerText = totalPrice - (totalPrice * 0.20);
+    
+}})
 
-
-// const removeWhiteSpace = this.value.trim()
+// coupon Input field
 couponInput.addEventListener('input', function() {
-    couponInput.value = couponInput.value.trim().toUpperCase()
-    if (couponInput.value === 'NEW20' || couponInput.value === 'COUPLE20') {
+    couponInput.value = couponInput.value.toUpperCase()
+    if (couponInput.value === 'NEW15' || couponInput.value === 'COUPLE 20') {
         couponBtn.classList.remove('btn-disabled');
     } else {
         couponBtn.classList.add('btn-disabled');
     }
 });
+
 
 
 // reload Btn
